@@ -12,4 +12,4 @@ for(var i =0; i < x.length; i++){
 
 media= aux2/aux1;
 
-console.log(media)
+console.log("a media é: "+media)
