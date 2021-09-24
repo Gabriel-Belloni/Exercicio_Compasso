@@ -8,4 +8,4 @@ var valor2=16;
 resultado = 0;
 
 resultado = media(valor1,valor2);
-console.log("media de "+valor1 + " e " + valor2+ " é "+resultado)
+console.log("A media é "+resultado)
