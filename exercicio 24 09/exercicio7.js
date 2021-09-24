@@ -4,7 +4,7 @@ return media;
 }
 
 var valor1=12;
-var valor2=15;
+var valor2=16;
 resultado = 0;
 
 resultado = media(valor1,valor2);
