@@ -1,0 +1,15 @@
+Gabriel Belloni
+
+Na masterclass relembramos oque foi feito na aula passada e novos assuntos
+
+é interessante saber um pouco quando se pode ter conflito em repositórios
+Essa e uma parte legal porque e quase certo que vai acontecer conosco
+e bom sabermos como resolver esses problemas
+
+Como deletar branch, como funciona os git ignore que utilizaremos com certeza 
+
+Como funciona a ferramentas git desktop, o histórico de  mudanças, revertes e commits etc
+
+a integração vscode e git é muito legal ja que utilizo o vscode a muito tempo mas não sabia utilizar com o git
+
+e conhecer os comandos para o terminal e sempre importante porque pode vir a ocorrer erros e seja necessário utilizar os comandos via cmd
