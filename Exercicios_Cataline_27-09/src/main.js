@@ -170,7 +170,7 @@ const showfullname =({firstName, secondName}) => {
 ------------------------------------------------------------------------------------------------
 operadores rest/spread
 
-*/
+
 
 const numbers = [1,2,3,4,5,6,]
 
@@ -182,3 +182,115 @@ const sum = (... params) => {
     return params.reduce((total,next) => total + next)
 }
 console.log(sum(5,5,10,10,10))
+
+
+------------------------------------------------------------------------------------------------
+Função construtora
+
+
+function Car (brand, price){
+    this.brand = brand
+    this.price = price
+}
+
+const civic = new Car('honda', 130)
+const hb20 = new Car('hyundai', 80)
+
+console.log(civic)
+console.log(hb20)
+---------------------------------------------------------------------------
+Classes
+
+class Car {
+    constructor(brand,price=99){
+        this.brand = brand
+        this.price = price
+    }
+    run(){
+console.log('Acelerando')
+    }
+}
+const civic = new Car('honda')
+console.log(civic.price)
+
+---------------------------------------------------------------------------
+Get Set
+
+class Person {
+    constructor(name){
+        this._name= name
+    }
+    get name(){
+        return this._name
+    }
+    set name (newName) {
+        this._name = newName
+    }
+}
+const person = new Person('gabriel belloni')
+person.name = 'mateus'
+console.log(person.name)
+---------------------------------------------------------------------------
+Metodo estatito
+
+ class Calculator {
+     static sum(a,b){
+       return a+b
+     }
+ }
+ console.log(Calculator.sum(10,9))
+
+
+class Person {
+    constructor(firstName, secondName){
+        this.firstName = firstName
+        this.secondName= secondName
+    }
+    get fullName(){
+        return Person.joinNames(this.firstName,this.secondName)
+    }
+        static joinNames(firstName, secondName){
+        return `${firstName} ${secondName}`
+        }
+}
+
+const person = new Person('gabriel', 'belloni')
+console.log(person.fullName)
+------------------------------------------------------------------------------------------------
+Herança 
+
+
+
+class Veiculo {
+    constructor(rodas){
+        this.rodas = rodas
+    }
+
+    Acelerando(){
+        console.log('Acelerando')
+    }
+}
+
+class Moto extends Veiculo {
+    constructor(rodas, capacete){
+        super(rodas)
+        this.capacete = capacete
+    }
+    empinar() {
+        console.log(`empinou com ${this.rodas} rodas`)
+    }
+
+    usandoCapacete(){
+        console.log(this.capacete)
+    }
+}
+
+const bross = new Moto(2, true)
+
+bross.Acelerando()
+bross.usandoCapacete()
+
+------------------------------------------------------------------------------------------------
+*/
+
+console.log('hello world')
