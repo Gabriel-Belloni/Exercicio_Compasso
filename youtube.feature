@@ -26,3 +26,20 @@ Funcionalidade: Pesquisar no youtube e Validar o número total de visualizaçõe
         E acessar o canal do Porta dos Fundos
         E acessar a aba "sobre"
         Então Deverá validar se o número total de visualização é maior que 6.600.000.000
+
+
+
+           
+           #teste de esquema de cenario
+            Contexto:
+             Dado que esteja no home do youtube
+
+        Esquema do Cenario: pesquisar canais e validar o número total de visualizações
+            Quando pesquisar por "<Canais>"
+            E acessar a aba "sobre"
+            Então Deverá validar se o número total de visual é maior que "<Views>"
+            Exemplos:
+            | Canais           | Views         |
+            | Compasso UOL     | 30.000        |
+            | Vevo             | 500.000.000   |
+            | Porta dos Fundos | 6.600.000.000 |
