@@ -10,4 +10,4 @@ Funcionalidade: Validar se o primeiro livro contém determinada palavra em seu n
         Dado que esteja na pagina amazon.com.br
         Quando acessar a aba de livros
         E pesquisar "ISTQB"
-        Entao deverá validar se o nome do primeiro livro da lista de resultados contem a palavra "Syllabus"
+        Entao o nome do primeiro livro deverá conter a palavra "Syllabus"
