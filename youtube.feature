@@ -1,5 +1,4 @@
 #Language: pt
-#Language: pt
 
 Funcionalidade: Pesquisar no youtube e Validar o número total de visualizações 
     Como usuario no youtube 
