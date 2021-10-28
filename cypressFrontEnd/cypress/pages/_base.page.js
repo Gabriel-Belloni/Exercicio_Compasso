@@ -90,5 +90,18 @@ export default class Base {
   static validarIdDoElemento(elemento, id) {
     cy.get(elemento).should('have.id', id)
   }
+  static validarConteudoDoElemento(elemento, valor) {
+    cy.get(elemento).should('contain', valor)
+  }
+  static validarExistenciaEVisibilidadeDoElemento(elemento) {
+    cy.get(elemento).should('exist', { timeout: Cypress.env('global_timeout') })
+    cy.get(elemento).should('be.visible')
+  }
+  static limparCampos(pCampo,sCampo= undefined,tCampo= undefined) {
+    cy.get(pCampo).clear()
+    cy.get(sCampo).clear()
+    cy.get(tCampo).clear()
+  
+  }
   
 }

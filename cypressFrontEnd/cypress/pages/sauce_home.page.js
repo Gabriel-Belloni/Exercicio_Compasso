@@ -1,60 +1,112 @@
 import Base from './_base.page' 
-const URL                   ='/inventory.html';                         
-const URL_ITEM              = 'inventory-item.html';
-const URL_SOBRE             = 'saucelab';
-const URL_LOGOUT            = 'saucedemo';
-const SELETOR_HOME          = '[data-test=product_sort_container]';
-const FIRST_ITEM            = '#item_4_img_link > .inventory_item_img';
-const BURGER_MENU           = '#react-burger-menu-btn';
-const BURGER_MENU_INVENTORY = '#inventory_sidebar_link';
-const BURGER_MENU_RESET     = '#reset_sidebar_link';
-const BURGER_MENU_SOBRE     = '#about_sidebar_link';
-const BURGER_MENU_LOGOUT    = '#logout_sidebar_link';                   
+import faker from 'faker';
+const CART_URL              = 'cart.html'
+const CHECKOUT_FINISHED_URL ='checkout-complete.html'
+const SELETOR_HOME          = '[data-test=product_sort_container]';             
 const CART_BUTTON           = '#shopping_cart_container'
 const CART_ADD              ='[data-test=add-to-cart-sauce-labs-backpack]'
 const CART_ELEMENT          ='.cart_item > div >a'
 const CART_ITEM             ='item_4_title_link'
-
+const ARRAY_PRODUTOS        ='.inventory_list'
+const NUM_CART              = '.shopping_cart_badge'
+const CHECKOUT_CART         ='[data-test=checkout]'
+const CHECKOUT_NAME         ='[data-test=firstName]'
+const CHECKOUT_LAST_NAME    ='[data-test=lastName]' 
+const CHECKOUT_ZIP_CODE     ='[data-test=postalCode]'
+const CHECKOUT_BTN          ='[data-test=continue]'
+const CHECKOUT_SUMMARY      = '.summary_info'
+const CHECKOUT_FINISHED     ='[data-test=finish]'
+const TXT_ERROR          ='[data-test=error]'
 export default class SauceHome extends Base {
 
-    static acessarSauceDemo(){
-        cy.visit('https://www.saucedemo.com')
-
+    static organizadorDeProdutos(){
+        for (let i = 0; i < 4; i++) {
+        super.waitElementAndSelectOption(SELETOR_HOME, i)
+        if(i == 0){
+            super.validarPrimeiroElementoDoArray(ARRAY_PRODUTOS,'Sauce Labs Backpack' )
+        }
+        if(i == 1){
+            super.validarPrimeiroElementoDoArray(ARRAY_PRODUTOS,'Test.allTheThings() T-Shirt (Red)' )
+        }
+        if(i == 2){
+            super.validarPrimeiroElementoDoArray(ARRAY_PRODUTOS,'Sauce Labs Onesie' )
+        }
+        if(i == 3){
+            super.validarPrimeiroElementoDoArray(ARRAY_PRODUTOS,'Sauce Labs Fleece Jacket' )
+            
+        }
     }
-    static organizadorDeProdutos(arrayP){
-        super.waitElementAndSelectOption(SELETOR_HOME, arrayP)
-    }
-
-    static BurgerMenu(){
-        super.clickOnElement(BURGER_MENU)
-        super.clickOnElement(BURGER_MENU_RESET)
-    }
-
-    static BurgerMenuAllItems(){
-
-        super.clickOnElement(FIRST_ITEM)
-        super.validarUrl(URL_ITEM)
-        super.clickOnElement(BURGER_MENU)
-        super.clickOnElement(BURGER_MENU_INVENTORY)
-        super.validarUrl(URL)
+        
     }
 
-    static BurgerMenuSobre(){
-        super.clickOnElement(BURGER_MENU)
-        super.clickOnElement(BURGER_MENU_SOBRE)
-        super.validarUrl(URL_SOBRE)
     
-    }
-    static BurgerMenuLogout(){
-        super.clickOnElement(BURGER_MENU)
-        super.clickOnElement(BURGER_MENU_LOGOUT)
-        super.validarUrl(URL_LOGOUT)
-    
-    }
     static addItemNoCarrinho(){
+        super.validarExistenciaEVisibilidadeDoElemento(CART_ADD)
+        super.validarExistenciaEVisibilidadeDoElemento(CART_BUTTON)
+
         super.clickOnElement(CART_ADD)
         super.clickOnElement(CART_BUTTON)
+    
+        super.validarUrl(CART_URL)
+
         super.validarIdDoElemento(CART_ELEMENT,CART_ITEM)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_CART)
+
+        super.validarConteudoDoElemento(NUM_CART, 1)
+        super.clickOnElement(CHECKOUT_CART)
+
+    }
+    static fazerCheckoutDoProdutoCorretamente(){
+
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_NAME)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_LAST_NAME)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_ZIP_CODE)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_BTN)
+
+        super.typeValue(CHECKOUT_NAME, `${faker.name.firstName()}`)
+        super.typeValue(CHECKOUT_LAST_NAME, `${faker.name.lastName()}`)
+        super.typeValue(CHECKOUT_ZIP_CODE, `${faker.address.zipCode()}`)
+
+        super.clickOnElement(CHECKOUT_BTN)
+
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_SUMMARY)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_FINISHED)
+        super.validarConteudoDoElemento(CHECKOUT_SUMMARY,'Payment Information:')
+        super.clickOnElement(CHECKOUT_FINISHED)
+
+        super.validarExistenciaEVisibilidadeDoElemento('.pony_express')
+        super.validarUrl(CHECKOUT_FINISHED_URL)
+
+
+    }
+    static fazerCheckoutDoProdutoIncorretamente(){
+        let valor = 1
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_NAME)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_LAST_NAME)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_ZIP_CODE)
+        super.validarExistenciaEVisibilidadeDoElemento(CHECKOUT_BTN)
+
+        for (valor; valor < 4; valor++){
+            if(valor ==1){
+                super.typeValue(CHECKOUT_LAST_NAME, `${faker.name.lastName()}`)
+                super.typeValue(CHECKOUT_ZIP_CODE, `${faker.address.zipCode()}`)
+                super.clickOnElement(CHECKOUT_BTN)
+                super.validateElementText(TXT_ERROR, 'Error: First Name is required')
+            }
+            if(valor ==2){
+                super.typeValue(CHECKOUT_NAME,  `${faker.name.firstName()}`)
+                super.typeValue(CHECKOUT_ZIP_CODE, `${faker.address.zipCode()}`)
+                super.clickOnElement(CHECKOUT_BTN)
+                super.validateElementText(TXT_ERROR, 'Error: Last Name is required')
+            }
+            if(valor ==3){
+                super.typeValue(CHECKOUT_NAME,  `${faker.name.firstName()}`)
+                super.typeValue(CHECKOUT_LAST_NAME, `${faker.name.lastName()}`)
+                super.clickOnElement(CHECKOUT_BTN)
+                super.validateElementText(TXT_ERROR, 'Error: Postal Code is required')
+            }
+            super.limparCampos(CHECKOUT_NAME,CHECKOUT_LAST_NAME,CHECKOUT_ZIP_CODE)
+        }
+
     }
 }
-
