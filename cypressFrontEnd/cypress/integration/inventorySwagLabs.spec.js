@@ -32,7 +32,7 @@ describe(" Deve fazer checkout do produto no carrinho", ()=>{
         it('fazer checkout do produto no carrinho', ()=>{
             SauceHome.fazerCheckoutDoProdutoCorretamente()
         })
-            describe(" Deve fazer checkout sem prencher todos os campos obrigatorios", ()=>{
+        describe(" Deve fazer checkout sem prencher todos os campos obrigatorios", ()=>{
             it('fazer checkout do produto no carrinho incorretamente', ()=>{
                 SauceHome.fazerCheckoutDoProdutoIncorretamente()
             })
