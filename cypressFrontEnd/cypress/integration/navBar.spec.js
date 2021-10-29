@@ -6,7 +6,7 @@
 describe("Teste de barra de navegação", () =>{
     beforeEach(() =>{
 
-        cy.visit('')
+        cy.visit('https://filipeconde.com.br')
     }) 
     
     it('deve acessar area "channel ao clicar no botao', () =>{
